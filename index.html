@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#020817">
+<title>ASTA AI</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at center, #10284a, #020817 70%);
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 18px;
+}
+
+header {
+  text-align: center;
+  margin-top: 20px;
+}
+
+h1 {
+  font-size: 38px;
+  letter-spacing: 8px;
+  color: #38bdf8;
+  text-shadow: 0 0 20px #008cff;
+}
+
+.status {
+  color: #6ee7ff;
+  font-size: 12px;
+  letter-spacing: 3px;
+  margin-top: 10px;
+}
+
+.orb {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  margin: 65px auto 25px;
+  background: radial-gradient(circle at 35% 30%,
+    #ffffff, #38bdf8 15%, #075985 48%, #020817 75%);
+  box-shadow: 0 0 30px #0ea5e9,
+              0 0 70px #0284c7,
+              inset 0 0 30px #7dd3fc;
+  animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 30px #0ea5e9,
+                0 0 70px #0284c7;
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 50px #38bdf8,
+                0 0 100px #0284c7;
+  }
+}
+
+.subtitle {
+  color: #bae6fd;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.chat {
+  width: 100%;
+  max-width: 500px;
+  background: #071629;
+  border: 1px solid #075985;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 0 25px #0369a1;
+}
+
+.messages {
+  min-height: 65px;
+  max-height: 220px;
+  overflow-y: auto;
+  margin-bottom: 12px;
+}
+
+.message {
+  padding: 10px;
+  margin-bottom: 8px;
+  background: #0c2945;
+  border-radius: 10px;
+  overflow-wrap: anywhere;
+}
+
+.input-area {
+  display: flex;
+  gap: 8px;
+}
+
+input {
+  min-width: 0;
+  flex: 1;
+  padding: 13px;
+  border: 1px solid #0284c7;
+  border-radius: 10px;
+  outline: none;
+  background: #020817;
+  color: white;
+}
+
+button {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  background: #0284c7;
+  color: white;
+  font-weight: bold;
+}
+
+button:active {
+  background: #0369a1;
+}
+
+footer {
+  margin-top: 35px;
+  color: #64748b;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>ASTA AI</h1>
+  <div class="status">● SYSTEM ONLINE</div>
+</header>
+
+<div class="orb"></div>
+
+<div class="subtitle">
+  Your Personal AI Assistant
+</div>
+
+<section class="chat">
+  <div class="messages" id="messages">
+    <div class="message">
+      ASTA: Hello! My interface is ready.
+      My AI brain is coming soon.
+    </div>
+  </div>
+
+  <form class="input-area" id="chatForm">
+    <input
+      id="userInput"
+      type="text"
+      placeholder="Talk to ASTA..."
+      autocomplete="off"
+      required
+    >
+    <button type="submit">Send</button>
+  </form>
+</section>
+
+<footer>
+  ASTA AI • PERSONAL ASSISTANT
+</footer>
+
+<script>
+const form = document.getElementById("chatForm");
+const input = document.getElementById("userInput");
+const messages = document.getElementById("messages");
+
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const text = input.value.trim();
+  if (!text) return;
+
+  const userMessage = document.createElement("div");
+  userMessage.className = "message";
+  userMessage.textContent = "YOU: " + text;
+  messages.appendChild(userMessage);
+
+  const reply = document.createElement("div");
+  reply.className = "message";
+  reply.textContent =
+    "ASTA: I received your message! My AI brain will be connected in the next step.";
+
+  messages.appendChild(reply);
+
+  input.value = "";
+  messages.scrollTop = messages.scrollHeight;
+});
+</script>
+
+</body>
+</html>
